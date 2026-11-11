@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ORM Compare — Grandis</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body class="viz-root">
+  <div class="container">
+    <header>
+      <h1>ORM Compare</h1>
+      <p class="subtitle">ADO.NET &middot; Dapper &middot; EF Core &mdash; azonos lekérdezések, élő mérés ugyanazon az adatbázison</p>
+      <div id="db-status" class="db-status muted">Kapcsolódás…</div>
+    </header>
+
+    <section class="card">
+      <div class="control-grid">
+        <label>Szcenárió
+          <select id="scenario"></select>
+        </label>
+        <label>Iterációk
+          <input type="number" id="iterations" value="20" min="1" max="500">
+        </label>
+        <label>Warmup
+          <input type="number" id="warmup" value="3" min="0" max="50">
+        </label>
+        <label id="recent-count-wrap" hidden>Rendelések száma
+          <input type="number" id="recent-count" value="100" min="1" max="5000">
+        </label>
+        <label id="page-size-wrap" hidden>Lapméret
+          <input type="number" id="page-size" value="50" min="1" max="500">
+        </label>
+        <label class="check" id="tracking-wrap">
+          <input type="checkbox" id="tracking">
+          <span>EF Core tracking változat is</span>
+        </label>
+      </div>
+      <p id="scenario-desc" class="muted"></p>
+      <div class="actions">
+        <button id="run" class="primary">Összehasonlítás futtatása</button>
+        <button id="reseed" class="ghost">Adatok újragenerálása</button>
+        <span id="status" class="muted" role="status"></span>
+      </div>
+    </section>
+
+    <section class="card" id="results" hidden>
+      <div class="results-head">
+        <h2 id="result-title"></h2>
+        <div class="metric-switch" role="radiogroup" aria-label="Megjelenített mutató">
+          <button class="metric active" data-metric="meanMs">Átlag</button>
+          <button class="metric" data-metric="medianMs">Medián</button>
+          <button class="metric" data-metric="p95Ms">P95</button>
+        </div>
+      </div>
+      <div id="validity"></div>
+      <div id="chart" class="chart" role="img" aria-label="Providerenkénti futásidő-összehasonlítás"></div>
+      <div class="table-wrap">
+        <table id="stats">
+          <thead>
+            <tr>
+              <th>Technológia</th><th>Min</th><th>Medián</th><th>Átlag</th>
+              <th>P95</th><th>Max</th><th>Szórás</th><th>Sorok</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card" id="history-card" hidden>
+      <h2>Korábbi futtatások</h2>
+      <div class="table-wrap">
+        <table id="history">
+          <thead>
+            <tr><th>Idő</th><th>Szcenárió</th><th>Iter.</th><th id="history-metric-head">Átlag (ms)</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="muted">
+      A mérés repository-szinten történik (Stopwatch), warmup-iterációkkal, providerenként azonos bemenetekkel.
+      Részletek: <a href="/swagger">Swagger</a> &middot;
+    </footer>
+  </div>
+  <div id="tooltip" class="tooltip" hidden></div>
+  <script src="app.js"></script>
+</body>
+</html>
