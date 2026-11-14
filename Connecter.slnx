@@ -6,7 +6,7 @@
     <Project Path="Grandis.Data/Grandis.Data.csproj" Id="c2bcf2b9-0907-4591-80f7-3346d7523f4c" />
   </Folder>
   <Folder Name="/SQL/">
-    <Project Path="../SQL/Grandis.TX/Grandis.TX.sqlproj" Id="b9602aee-a07b-487d-89a4-e4468c35686b">
+    <Project Path="SQL/Grandis.TX/Grandis.TX.sqlproj" Id="b9602aee-a07b-487d-89a4-e4468c35686b">
       <Build />
       <Deploy />
     </Project>
