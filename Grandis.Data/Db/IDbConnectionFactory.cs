@@ -20,9 +20,6 @@ namespace Grandis.Data.Db
             _connectionString = connectionString;
         }
 
-        //public IDbConnection CreateConnection()
-        //    => new SqlConnection(_connectionString);
-
         public SqlConnection CreateConnection() => new(_connectionString);
     }
 }

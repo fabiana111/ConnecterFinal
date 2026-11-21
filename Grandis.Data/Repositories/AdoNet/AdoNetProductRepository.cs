@@ -80,7 +80,6 @@ namespace Grandis.Data.Repositories.AdoNet
             cmd.Parameters.AddWithValue("@Offset", (query.Page - 1) * query.PageSize);
             cmd.Parameters.AddWithValue("@PageSize", query.PageSize);
 
-            // Egy körben (egy batch, két eredményhalmaz): összdarabszám + aktuális lap.
             cmd.CommandText = $"""
             SELECT COUNT(*) FROM [dbo].[Product] {where};
             SELECT {Columns} FROM [dbo].[Product] {where}

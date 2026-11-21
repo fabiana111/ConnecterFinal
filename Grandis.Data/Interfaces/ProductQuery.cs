@@ -11,7 +11,6 @@ namespace Grandis.Data.Interfaces
         public decimal? MaxPrice { get; set; }
         public bool? IsActive { get; set; }
 
-        /// <summary>1-alapú lapszám.</summary>
         public int Page { get; set; } = 1;
 
         public int PageSize { get; set; } = 50;

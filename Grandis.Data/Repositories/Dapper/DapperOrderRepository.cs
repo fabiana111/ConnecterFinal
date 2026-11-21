@@ -12,8 +12,6 @@ namespace Grandis.Data.Repositories.Dapper
     {
         private readonly IDbConnectionFactory _connectionFactory;
 
-        // Ugyanaz a join-forma, mint az ADO.NET és EF Core implementációban; a StatusId
-        // oszlop Status néven aliasolva, hogy a Dapper az enum property-re tudja mappelni.
         private const string Sql = """
         SELECT o.[Id], o.[OrderDate], o.[CustomerId], o.[StatusId] AS [Status], o.[TotalAmount],
                c.[Id], c.[CreditedAt], c.[FirstName], c.[LastName], c.[Email], c.[PhoneNumber], c.[AddresseeId],

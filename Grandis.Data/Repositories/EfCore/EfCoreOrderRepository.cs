@@ -24,8 +24,6 @@ namespace Grandis.Data.Repositories.EfCore
         {
             await using var ctx = await _context.CreateDbContextAsync(ct);
 
-            // Include-os, egy lekérdezéses (single query) gráf-betöltés — ugyanaz a join-forma,
-            // mint az ADO.NET és Dapper implementációban.
             IQueryable<Order> query = ctx.Orders
                 .OrderByDescending(o => o.OrderDate)
                 .ThenByDescending(o => o.Id)

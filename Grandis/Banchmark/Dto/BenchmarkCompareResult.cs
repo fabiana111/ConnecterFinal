@@ -13,7 +13,6 @@ namespace Grandis.Banchmark.Dto
         public double TotalElapsedMs { get; set; }
         public IReadOnlyList<ProviderBenchmarkResult> Results { get; set; } = [];
 
-        //Igaz, ha minden provider azonos sorszámot adott vissza
         public bool RowCountsMatch { get; set; }
 
         public string? Note { get; set; }

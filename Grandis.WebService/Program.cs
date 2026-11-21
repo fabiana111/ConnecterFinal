@@ -25,11 +25,11 @@ var connectionString = builder.Configuration.GetConnectionString("GrandisDb")
 // AdoNet + Dapper közös connection factory
 builder.Services.AddSingleton<IDbConnectionFactory>(new SqlConnectionFactory(connectionString));
 
-// EF Core: factory-alapú context-létrehozás (műveletenként friss DbContext)., erre azért van szükség mert egy futás alkalmával nem mérne jól, mert a DbContext nem thread-safe, és a DI konténerben singletonként van regisztrálva, így minden hívásnál új példányt kell létrehozni.
+//factory context(műveletenként friss DbContext), erre azért van szükség mert egy futás alkalmával nem mérne jól, mert a DbContext nem thread-safe, és a DI konténerben singletonként van regisztrálva, így minden hívásnál új példányt kell létrehozni.
 builder.Services.AddDbContextFactory<GrandisDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-// Program.cs / DI regisztráció
+//DI regisztráció
 builder.Services.AddKeyedScoped<IProductRepository, AdoNetProductRepository>(DataProviderType.AdoNet);
 builder.Services.AddKeyedScoped<IProductRepository, DapperProductRepository>(DataProviderType.Dapper);
 builder.Services.AddKeyedScoped<IProductRepository, EfCoreProductRepository>(DataProviderType.EfCore);
@@ -53,7 +53,6 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();

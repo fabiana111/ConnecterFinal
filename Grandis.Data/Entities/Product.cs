@@ -16,7 +16,6 @@ namespace Grandis.Data.Entities
         public int StockQuantity { get; set; }
         public bool IsActive { get; set; } = true;
 
-        // Navigációs tulajdonságok (EF Core-nak hasznos, ADO/Dapper esetén elhagyható vagy DTO-nál tölthető)
         public Category? Category { get; set; }
         public Supplier? Supplier { get; set; }
     }

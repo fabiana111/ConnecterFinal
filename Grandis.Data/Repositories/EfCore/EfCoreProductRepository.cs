@@ -42,7 +42,6 @@ namespace Grandis.Data.Repositories.EfCore
             if (query.MaxPrice is not null) filtered = filtered.Where(p => p.Price <= query.MaxPrice);
             if (query.IsActive is not null) filtered = filtered.Where(p => p.IsActive == query.IsActive);
 
-            // EF-idiomatikus lapozás: külön Count + lap-lekérdezés (két adatbázis-kör).
             var total = await filtered.CountAsync(ct);
             var items = await filtered
                 .OrderBy(p => p.Id)
@@ -70,8 +69,7 @@ namespace Grandis.Data.Repositories.EfCore
         public async Task<int> UpdatePriceAsync(long id, decimal price, CancellationToken ct = default)
         {
             await using var ctx = await _context.CreateDbContextAsync(ct);
-            // ExecuteUpdate: egyetlen UPDATE utasítás, szemantikailag azonos a másik két
-            // implementációval (a klasszikus betölt+módosít+SaveChanges két kört jelentene).
+
             return await ctx.Products
                 .Where(p => p.Id == id)
                 .ExecuteUpdateAsync(s => s.SetProperty(p => p.Price, price), ct);

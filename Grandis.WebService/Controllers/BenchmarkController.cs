@@ -6,14 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 [Route("api/benchmark")]
 public class BenchmarkController(BenchmarkService benchmark) : ControllerBase
 {
-    /// <summary>A felület számára: a futtatható szcenáriók listája.</summary>
+    /// <summary>futtatható szcenáriók listája</summary>
     [HttpGet("scenarios")]
     public ActionResult<IReadOnlyList<ScenarioInfo>> GetScenarios()
     {
         return Ok(BenchmarkService.Scenarios);
     }
 
-    /// <summary>Egy szcenárió futtatása egyetlen providerrel.</summary>
+    /// <summary>Egy szcenárió futtatása egyetlen providerrel</summary>
     [HttpPost("run")]
     public async Task<ActionResult<ProviderBenchmarkResult>> Run(
         [FromBody] BenchmarkRunRequest request, CancellationToken ct)
@@ -21,7 +21,7 @@ public class BenchmarkController(BenchmarkService benchmark) : ControllerBase
         return Ok(await benchmark.RunAsync(request, ct));
     }
 
-    /// <summary>Egy szcenárió futtatása mindhárom providerrel, összehasonlító eredménnyel.</summary>
+    /// <summary>Egy szcenárió futtatása mindhárom providerrel, összehasonlító eredménnyel</summary>
     [HttpPost("compare")]
     public async Task<ActionResult<BenchmarkCompareResult>> Compare(
         [FromBody] BenchmarkRequest request, CancellationToken ct)

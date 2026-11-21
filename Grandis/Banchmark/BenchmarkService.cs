@@ -12,7 +12,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 namespace Grandis.Benchmarks;
 
 /// <summary>
-/// A mérési motor: egy szcenáriót futtat egy vagy mindhárom adatelérési technológiával.
+/// A mérési motor egy szcenáriót futtat egy vagy mindhárom adatelérési technológiával.
 /// A korrekt összehasonlítás érdekében:
 ///  - minden provider ugyanazt az előre generált bemenet-sorozatot kapja (Id-k, árak),
 ///  - minden sorozat előtt warmup-iterációk futnak (JIT, terv-cache, buffer pool),
@@ -133,7 +133,7 @@ public class BenchmarkService
 
         var operation = BuildOperation(request, provider, productRepository, orderRepository, inputs, ct);
 
-        // Kiegyenlített indulás: az előző sorozat allokációi ne itt szemétgyűjtődjenek.
+        //az előző sorozat allokációi ne itt szemétgyűjtődjenek.
         GC.Collect();
         GC.WaitForPendingFinalizers();
         GC.Collect();
@@ -224,8 +224,8 @@ public class BenchmarkService
     }
 
     /// <summary>
-    /// Providerektől független, bemenetek (cél-Id-k, árak) előállítása,
-    /// hogy minden provider pontosan ugyanazokat a műveleteket hajtsa végre.
+    /// Providerektől független, bemenetek előállítása,
+    /// hogy mindegyik pontosan ugyanazokat a műveleteket hajtsa végre.
     /// </summary>
     private async Task<BenchmarkInputs> PrepareInputsAsync(BenchmarkRequest request, CancellationToken ct)
     {

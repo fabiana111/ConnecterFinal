@@ -29,7 +29,7 @@ public class AdminController : ControllerBase
         });
     }
 
-    /// <summary>Minden adat törlése és újragenerálása a Seed beállítások szerint.Hosszú művelet!</summary>
+    /// <summary>Minden adat törlése és újragenerálása a Seed beállítások szerint</summary>
     [HttpPost("reseed")]
     public async Task<ActionResult> Reseed(CancellationToken ct)
     {

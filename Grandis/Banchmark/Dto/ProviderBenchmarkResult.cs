@@ -10,7 +10,6 @@ namespace Grandis.Banchmark.Dto
         public bool EfCoreTracking { get; set; }
         public int Iterations { get; set; }
 
-        //Ellenőrző érték, a providereknek azonos adatot kell visszaadniuk
         public long RowsReturned { get; set; }
 
         public double MinMs { get; set; }
